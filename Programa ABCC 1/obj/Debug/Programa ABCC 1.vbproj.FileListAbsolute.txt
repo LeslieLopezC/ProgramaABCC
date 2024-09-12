@@ -1,0 +1,12 @@
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\bin\Debug\Programa ABCC 1.exe.config
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\bin\Debug\Programa ABCC 1.exe
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\bin\Debug\Programa ABCC 1.pdb
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\bin\Debug\Programa ABCC 1.xml
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.vbproj.AssemblyReference.cache
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa_ABCC_1.Form1.resources
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa_ABCC_1.Resources.resources
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.vbproj.GenerateResource.cache
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.vbproj.CoreCompileInputs.cache
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.exe
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.xml
+C:\Users\roger\source\repos\Programa ABCC 1\Programa ABCC 1\obj\Debug\Programa ABCC 1.pdb

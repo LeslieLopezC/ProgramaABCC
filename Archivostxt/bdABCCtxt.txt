@@ -1,0 +1,134 @@
+-- Crear la base de datos si no existe
+IF DB_ID('InventarioArticulos') IS NULL
+    CREATE DATABASE InventarioArticulos;
+GO
+
+-- Usar la base de datos
+USE InventarioArticulos;
+GO
+-- Crear el procedimiento almacenado ValidarSKU
+CREATE PROCEDURE ValidarSKU
+    @SKU INT,
+    @SKUExists BIT OUTPUT
+AS
+BEGIN
+    -- Contar el número de registros que tienen el SKU especificado
+    DECLARE @Count INT;
+    SELECT @Count = COUNT(*)
+    FROM Articulos
+    WHERE SKU = @SKU;
+
+    -- Si el SKU existe, establecer el parámetro de salida a 1, de lo contrario a 0
+    IF @Count > 0
+        SET @SKUExists = 1;
+    ELSE
+        SET @SKUExists = 0;
+END;
+GO
+
+-- Crear la tabla Articulos si no existe
+IF OBJECT_ID('Articulos', 'U') IS NULL
+
+-- Crear la tabla Articulos
+CREATE TABLE Articulos (
+    SKU INT PRIMARY KEY,
+    Articulo NVARCHAR(100) NOT NULL,
+    Marca NVARCHAR(50) NOT NULL,
+    Modelo NVARCHAR(50) NOT NULL,
+    Departamento INT NOT NULL,
+    Clase INT NOT NULL,
+    Familia INT NOT NULL,
+    Cantidad INT NOT NULL,
+    Stock INT NOT NULL,
+    FechaAlta DATE NOT NULL DEFAULT GETDATE(),
+    FechaBaja DATE NULL
+);
+GO
+
+-- Crear el procedimiento almacenado InsertarArticulo
+CREATE PROCEDURE InsertarArticulo
+    @SKU INT,
+    @Articulo NVARCHAR(100),
+    @Marca NVARCHAR(50),
+    @Modelo NVARCHAR(50),
+    @Departamento INT,
+    @Clase INT,
+    @Familia INT,
+    @Cantidad INT,
+    @Stock INT
+AS
+BEGIN
+    INSERT INTO Articulos (SKU, Articulo, Marca, Modelo, Departamento, Clase, Familia, Cantidad, Stock)
+    VALUES (@SKU, @Articulo, @Marca, @Modelo, @Departamento, @Clase, @Familia, @Cantidad, @Stock);
+END;
+GO
+-- Llamar al procedimiento almacenado para insertar un artículo
+EXEC InsertarArticulo @SKU = 1, @Articulo = 'Articulo 1', @Marca = 'Marca 1', @Modelo = 'Modelo 1', @Departamento = 1, @Clase = 1, @Familia = 1, @Cantidad = 10, @Stock = 100;
+
+-- Crear el procedimiento almacenado ActualizarArticulo
+CREATE PROCEDURE ActualizarArticulo
+    @SKU INT,
+    @Articulo NVARCHAR(100),
+    @Marca NVARCHAR(50),
+    @Modelo NVARCHAR(50),
+    @Departamento INT,
+    @Clase INT,
+    @Familia INT,
+    @Cantidad INT,
+    @Stock INT
+AS
+BEGIN
+    UPDATE Articulos
+    SET Articulo = @Articulo,
+        Marca = @Marca,
+        Modelo = @Modelo,
+        Departamento = @Departamento,
+        Clase = @Clase,
+        Familia = @Familia,
+        Cantidad = @Cantidad,
+        Stock = @Stock
+    WHERE SKU = @SKU;
+END;
+GO
+
+-- Crear el procedimiento almacenado EliminarArticulo
+CREATE PROCEDURE EliminarArticulo
+    @SKU INT
+AS
+BEGIN
+    DELETE FROM Articulos WHERE SKU = @SKU;
+END;
+GO
+
+-- Crear el procedimiento almacenado ConsultarArticulo
+CREATE PROCEDURE ConsultarArticulo
+    @SKU INT
+AS
+BEGIN
+    SELECT SKU, Articulo, Marca, Modelo, Departamento, Clase, Familia, Cantidad, Stock, FechaAlta, FechaBaja
+    FROM Articulos
+    WHERE SKU = @SKU;
+END;
+GO
+-- Crear tabla Departamentos
+CREATE TABLE Departamentos (
+    IDDepartamento INT PRIMARY KEY,
+    NombreDepartamento NVARCHAR(100) NOT NULL
+);
+
+-- Crear tabla Clases
+CREATE TABLE Clases (
+    IDClase INT PRIMARY KEY,
+    NombreClase NVARCHAR(100) NOT NULL
+);
+
+-- Crear tabla Familias
+CREATE TABLE Familias (
+    IDFamilia INT PRIMARY KEY,
+    NombreFamilia NVARCHAR(100) NOT NULL
+);
+
+-- Insertar datos de ejemplo
+--INSERT INTO Departamentos (IDDepartamento, NombreDepartamento) VALUES (1, 'Electrónica');
+--INSERT INTO Clases (IDClase, NombreClase) VALUES (1, 'Computadoras');
+--INSERT INTO Familias (IDFamilia, NombreFamilia) VALUES (1, 'Laptops');
